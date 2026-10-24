@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+read -r n < <(openssl rand -hex 16)
+read -r h < <(printf '%s' "${n}" | sha256sum)
+
+printf '%s\n' "${n}"
+sed -i "9s/[^ ]*\$/${h%% *}/" hash
+
+# hash: 4d440988700248c39bb30549eb121e757e3a9e0b616a9ea971db8d9e5f8ba560
